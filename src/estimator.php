@@ -10,7 +10,7 @@
 
 
 
-      <form name = "myForm"   action="/covid-19-estimator/blob/assessment/src/estimator.php" method="post" >
+      <form name = "myForm"   action="/Users/runner/runners/2.168.0/work/covid-19-estimator/covid-19-estimator/src/estimator.php" method="post" >
 
   <table bgcolor="#C4C4C4" align="center" width="380" border="0">  
 <tr>    
@@ -83,10 +83,11 @@ covid19ImpactEstimator();
 
 function covid19ImpactEstimator()
 {
-  $error_message = "";$success_message = "";
+  $error_message = "";
+  $success_message = "";
  $days= ""; $increase= "";  $newIncrease= "";  $truncated= "";
  $currentlyInfected= "";$severeImpact= "";$impactinfectionsByRequestedTime= "";
- $severeinfectionsByRequestedTime= "";
+ $severeinfectionsByRequestedTime= "";  $hospitalBedsByRequestedTime= ""; 
  $severeCasesByRequestedTime = "";$totalAvailableBedsforOccupacy = "";
  $casesForICUByRequestedTime= ""; $casesForVentilatorsByRequestedTime= ""; 
   $dollarsInFlight= "";  $svimpact= "Severe Impact Estimation";$impact= " Impact Estimation";
