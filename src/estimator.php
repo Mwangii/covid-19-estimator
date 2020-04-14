@@ -55,23 +55,7 @@ if(isset($_POST['calculate'])){
      $isValid = false;
      $error_message = "Please fill all fields.";
    }
-   //convert months to days()
-   if($isValid && ($period== 'months') ){
-         $days = $elapse*30;
-       
-   echo "Study Now " . $truncated . "<br>"; 
-   }
-  // convert weeks to days
-     if($isValid && ($period== 'weeks') ){
-         $days = $elapse*7;
-       
-   }
-   // convert weeks to days
-     if($isValid && ($period== 'days') ){
-         $days = $elapse;
-       
-   }
-
+ 
 
 
        
@@ -97,23 +81,7 @@ if(isset($_POST['calculate'])){
    }
     
    
-      echo "" . $impact. "<br>"; 
       
-       echo "<table border=1 cellspacing=0 cellpading=0>
-<tr> <td><font color=blue>Estimation of Currently Infected is</td> <td>$currentlyInfected</font></td></tr> 
-<tr> <td><font color=blue>Estimation  by requested time for currently infected</td> <td>$impactinfectionsByRequestedTime</font></td></tr>
-<tr> <td><font color=blue>Estimation of Monentary value likely to be lost in USD  is</td> <td>$dollarsInFlight$ </font></td></tr>
-</table>";
-
-echo "" . $svimpact. "<br>"; 
-echo "<table border=1 cellspacing=0 cellpading=0>
-<tr> <td><font color=blue>The Estimation of Severe Impacts</td> <td>$severeImpact</font></td></tr> 
-<tr> <td><font color=blue>Estimation  by requested time for Severly infected</td> <td>$severeinfectionsByRequestedTime</font></td></tr>
-<tr> <td><font color=blue>Available beds for patients with Severe Cases</td> <td>$hospitalBedsByRequestedTime</font></td></tr>
-<tr> <td><font color=blue>Severe Cases that requires hospitalization</td> <td>$severeCasesByRequestedTime</font></td></tr>
-
-</table>";
-
 
 
 }
