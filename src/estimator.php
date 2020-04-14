@@ -26,7 +26,7 @@
 </tr>  
 <tr>    
 <td>Average Daily Income in USD</td>    
-<td><input type="number" value="<?php echo $_POST['income']; ?>" readonly=""  /></td>  
+<td><input type="number" name="income" id="income" value="<?php echo $_POST['income']; ?>" readonly=""  /></td>  
 </tr>
     
 <td>Average Daily Income per Population</td>    
