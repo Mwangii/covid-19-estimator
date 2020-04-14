@@ -1,0 +1,187 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Covid-19 Infections Estimator</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+   
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <div class="container">
+
+
+    <div class="row">
+       <h1>Covid-19 Infections Estimator</h1>
+
+        <div class="col-sm-offset-4 col-sm-4">
+            <form name = "myForm"   action="https://github.com/Mwangii/covid-19-estimator/blob/assessment/src/estimator.php" method="post" >
+                <div class="form-group">
+                <label for="age">Choose Region</label>
+          <div class="input-group">
+                        <select class="form-control" name="region" id="region" required>
+                            <option value="Africa">Africa</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Europe">Europe</option>
+                            <option value="Middle East">Middle East</option>
+                            <option value="North America">North America</option>
+                            <option value="South America">South America</option>
+                           
+                        </select>
+              <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+                </div>
+              
+                <div class="form-group">
+                <label>Average Age(Years)</label>
+          <div class="input-group" >
+            <input type="number" class="form-control" name="age" id="age" placeholder="(yrs)" required>
+            <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+        </div>
+            <div class="form-group">
+                <label>Average Daily Income(USD)</label>
+          <div class="input-group" data-validate="number">
+            <input type="number" class="form-control" name="income" id="income" placeholder="($)" required>
+            <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+        </div>
+            <div class="form-group">
+                <label>Average Daily Income(Population)</label>
+          <div class="input-group" data-validate="number">
+            <input type="number" class="form-control" name="data-population" id="data-population" placeholder="($)" required>
+            <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+        </div>
+        <div class="form-group">
+                <label for="age">Choose Period Type</label>
+          <div class="input-group">
+                        <select class="form-control" name="data-period-type" id="data-period-type" required>
+                            <option value="days">Days</option>
+                            <option value="weeks">Weeks</option>
+                            <option value="months">Months</option>
+                          
+                           
+                        </select>
+              <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+                </div>
+         
+       
+        
+         
+        </div>
+
+          <div class="row">
+               <div class="form-group">
+                  <label>Time to Elapse</label>
+          <div class="input-group" data-validate="number">
+            <input type="number" class="form-control" name="data-time-to-elapse" id="data-time-to-elapse" placeholder="(days/months/weeks)" required>
+            <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+
+        </div>
+           <div class="form-group">
+                  <label>Total Reported Cases</label>
+          <div class="input-group" data-validate="number">
+            <input type="number" class="form-control" name="data-reported-cases" id="data-reported-cases" placeholder="(total reported cases)" required>
+            <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+
+        </div>
+           <div class="form-group">
+                  <label>Total Population</label>
+          <div class="input-group" data-validate="number">
+            <input type="number" class="form-control" name="total_population" id="total_population" placeholder="(total population)" required>
+            <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+
+        </div>
+           <div class="form-group">
+                  <label>Total Hospital Beds</label>
+          <div class="input-group" data-validate="number">
+            <input type="number" class="form-control" name="data-total-hospital-beds" id="data-total-hospital-beds" placeholder="(total beds)" required>
+            <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+          </div>
+
+        </div>
+
+        
+         
+            <div class="form-group">
+                         
+    
+                    <div class="form-group">
+                     <div class="modal-footer">
+                        <button class="btn btn-danger" type="reset">Reset</button>
+                        <button type="submit" id="calculate" name="calculate" class="btn btn-primary">Calculate</button>
+                     </div>
+                    </div>
+                
+        </div>  
+            </form> 
+            <div>
+                <h4 id="input"></h4>
+                 <p id="reg"></p> 
+              <p id="agy"></p> 
+              <p id="incm"></p> 
+               <p id="pop"></p> 
+               <p id="ptype"></p> 
+               <p id="elap"></p> 
+               <p id="rcases"></p> 
+                <p id="tpop"></p> 
+                 <p id="tbeds"></p> 
+              <h4 id="output"></h4>
+              <p id="currentlyInfected"></p> 
+               <p id="estimate"></p>  
+                <p id="dollars"></p>
+                <h4 id="svoutput"></h4>
+                <p id="severeImpact"></p> 
+                 <p id="estimateSvr"></p> 
+                  <p id="hospitalization"></p> 
+                 <p id="kitanda"></p>
+                
+
+
+            </div>
+           
+
+            
+             
+             
+             
+
+  </div>
+   
+    </div>
+
+
+
+
+
+  </body>
+
+
+
+
+
+</html>
