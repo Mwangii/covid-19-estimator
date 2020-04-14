@@ -14,7 +14,8 @@ function covid19ImpactEstimator()
   $error_message = "";$success_message = "";
  $days= ""; $increase= "";  $newIncrease= "";  $truncated= "";
  $currentlyInfected= "";$severeImpact= "";$impactinfectionsByRequestedTime= "";$severeinfectionsByRequestedTime= "";
- $severeCasesByRequestedTime = "";$totalAvailableBedsforOccupacy = "";
+ $severeCasesByRequestedTime = "";$totalAvailableBedsforOccupacy = "";$region = "";$age = "";$income = "";
+ $population = "";$period = "";$elapse = "";$reported = "";$total_population = "";$hospital = "";
  $casesForICUByRequestedTime= ""; $casesForVentilatorsByRequestedTime= "";  $dollarsInFlight= "";  $svimpact= "Severe Impact Estimation";$impact= " Impact Estimation";$input= " Inputs"; $hospitalBedsByRequestedTime= "";
 
 // Register  data
