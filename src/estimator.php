@@ -45,23 +45,6 @@ if(isset($_POST['calculate'])){
      $isValid = false;
      $error_message = "Please fill all fields.";
    }
- //convert months to days()
-   if($isValid && ($period== 'months') ){
-         $days = $elapse*30;
-       
-   echo "Study Now " . $truncated . "<br>"; 
-   }
-  // convert weeks to days
-     if($isValid && ($period== 'weeks') ){
-         $days = $elapse*7;
-       
-   }
-   // convert weeks to days
-     if($isValid && ($period== 'days') ){
-         $days = $elapse;
-       
-   }
-
 
        
 
@@ -70,7 +53,7 @@ if(isset($_POST['calculate'])){
    $currentlyInfected=$reported*10; 
   $severeImpact=$reported*50;
          
-   $increase = floor($days/3);
+   $increase = floor($elapse/3);
    $newIncrease = floor(2 ** $increase);
 
 
