@@ -10,7 +10,7 @@
 
 
 
-      <form name = "myForm"   action="src/estimator.php" method="post" >
+      <form name = "myForm"   action="/covid-19-estimator/blob/assessment/src/estimator.php" method="post" >
 
   <table bgcolor="#C4C4C4" align="center" width="380" border="0">  
 <tr>    
