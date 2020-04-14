@@ -1,6 +1,11 @@
+ <?php 
+
+
+
 
 
 covid19ImpactEstimator();  
+  
 
 
 //function to perfom the estimations
