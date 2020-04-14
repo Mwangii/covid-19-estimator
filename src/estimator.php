@@ -1,18 +1,3 @@
-<!doctype html>
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Covid-19 Infections Estimator</title>
-
-      </html>
-    <?php 
-
-
-
 
 
 covid19ImpactEstimator();  
@@ -51,17 +36,32 @@ if(isset($_POST['calculate'])){
      $isValid = true;
 
    // Check fields are empty or not
-   if($age == '' || $income== '' || $population== '' || $elapse== '' || $reported== ''|| $total_population== ''|| $hospital== ''){
+   if($region == '' ||$period == '' ||$age == '' || $income== '' || $population== '' || $elapse== '' || $reported== ''|| $total_population== ''|| $hospital== ''){
      $isValid = false;
      $error_message = "Please fill all fields.";
    }
- 
+ //convert months to days()
+   if($isValid && ($period== 'months') ){
+         $days = $elapse*30;
+       
+   echo "Study Now " . $truncated . "<br>"; 
+   }
+  // convert weeks to days
+     if($isValid && ($period== 'weeks') ){
+         $days = $elapse*7;
+       
+   }
+   // convert weeks to days
+     if($isValid && ($period== 'days') ){
+         $days = $elapse;
+       
+   }
 
 
        
 
  if($isValid ){
-
+    
    $currentlyInfected=$reported*10; 
   $severeImpact=$reported*50;
          
