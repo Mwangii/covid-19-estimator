@@ -41,7 +41,7 @@ if(isset($_POST['calculate'])){
      $isValid = true;
 
    // Check fields are empty or not
-   if($region == '' ||$period == '' ||$age == '' || $income== '' || $population== '' || $elapse== '' || $reported== ''|| $total_population== ''|| $hospital== ''){
+   if($age == '' || $income== '' || $population== '' || $elapse== '' || $reported== ''|| $total_population== ''|| $hospital== ''){
      $isValid = false;
      $error_message = "Please fill all fields.";
    }
