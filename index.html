@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Covid19 Infections Estimator</title>
+    <title>Covid-19 Infections Estimator</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -33,7 +33,7 @@
        <h1>Covid-19 Infections Estimator</h1>
 
         <div class="col-sm-offset-4 col-sm-4">
-            <form name = "myForm"   action="https://github.com/Mwangii/covid-19-estimator/blob/assessment/src/estimator.php" method="post" >
+            <form name = "myForm" >
                 <div class="form-group">
                 <label for="age">Choose Region</label>
           <div class="input-group">
@@ -68,7 +68,7 @@
             <div class="form-group">
                 <label>Average Daily Income(Population)</label>
           <div class="input-group" data-validate="number">
-            <input type="number" class="form-control" name="data-population" id="data-population" placeholder="($)" required>
+            <input type="number" class="form-control" name="population" id="data-population" placeholder="($)" required>
             <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
           </div>
         </div>
@@ -133,7 +133,7 @@
                     <div class="form-group">
                      <div class="modal-footer">
                         <button class="btn btn-danger" type="reset">Reset</button>
-                        <button type="submit" id="calculate" name="calculate" class="btn btn-primary">Calculate</button>
+                        <button type="button" id="data-goestimate" name="data-goestimate" class="btn btn-primary" onclick="covid19ImpactEstimator()">Calculate</button>
                      </div>
                     </div>
                 
@@ -176,11 +176,267 @@
 
 
 
+     <script>
+
+
+            function covid19ImpactEstimator()
+{
+
+
+  covid19ImpactEstimator2();
+ 
+}
+
+
+
+            function covid19ImpactEstimator2()
+            {     var  region = document.getElementById("region").value;
+                  var age = document.getElementById("age").value;
+                   var  income= document.getElementById("income").value;
+                   var  population = document.getElementById("data-population").value;
+                     var  period= document.getElementById("data-period-type").value;
+                     var  elapse = document.getElementById("data-time-to-elapse").value;
+                     var   total_population= document.getElementById("total_population").value;
+                      var   beds = document.getElementById("data-total-hospital-beds").value;
+               var   reported = document.getElementById("data-reported-cases").value;
+                    
+                    //first confirm the pages are not null
+
+               var ag = document.forms["myForm"]["age"].value;
+               var ic = document.forms["myForm"]["income"].value;
+                var popo = document.forms["myForm"]["data-population"].value;
+                var ela = document.forms["myForm"]["data-time-to-elapse"].value;
+                 var rep = document.forms["myForm"]["data-reported-cases"].value;
+                  var pp = document.forms["myForm"]["total_population"].value;
+                   var ho = document.forms["myForm"]["data-total-hospital-beds"].value;
+             
+ 
+        if (ag == "" ) {
+       alert(" Average Age must be filled out");
+      return false;
+         }
+          if (ic == "" ) {
+       alert(" Average Daily Income must be filled out");
+      return false;
+         }
+          if (popo == "" ) {
+       alert(" Average Daily Income per Population must be filled out");
+      return false;
+         }
+                if (ela == "" ) {
+       alert(" Time to Elapse  must be filled out");
+      return false;
+         }
+            if (rep == "" ) {
+       alert(" Total Reported Cases  must be filled out");
+      return false;
+         }
+            if (pp == "" ) {
+       alert(" Total Population  must be filled out");
+      return false;
+         }
+            if (ho == "" ) {
+       alert(" Total Hospital Beds  must be filled out");
+      return false;
+         }
+              
+             //input
+             var   reg = document.getElementById("reg");
+               var  agy= document.getElementById("agy");
+                var  incm= document.getElementById("incm");
+                var  pop= document.getElementById("pop");
+                var  ptype= document.getElementById("ptype");
+                var  elap= document.getElementById("elap");
+                var  rcases= document.getElementById("rcases");
+                var  tpop= document.getElementById("tpop");
+                var  tbeds= document.getElementById("tbeds");
+
+
+
+
+                    //outpu
+              var   infected = document.getElementById("currentlyInfected");
+               var  severe= document.getElementById("severeImpact");
+                var  estimate= document.getElementById("estimate");
+                var  estimateSevere= document.getElementById("estimateSvr");
+                var  hospitalization= document.getElementById("hospitalization");
+                var  kitanda= document.getElementById("kitanda");
+                var  dollars= document.getElementById("dollars");
+
+               
+
+                var currentlyInfected=reported*10; 
+                var severeImpact=reported*50;
+                    
+
+                         
+//////the function to convert days
+/////////////////////////////////////////////////////////////////////////////
+
+                          if (document.getElementById('data-period-type').value == 'weeks') {
+                           
+                              var  days=elapse*7;
+                              var increase=Math.floor(days/3);
+       var newIncrease=Math.floor(2 ** increase);
+       var impactinfectionsByRequestedTime=Math.floor(currentlyInfected*newIncrease);
+        var severeinfectionsByRequestedTime=Math.floor(severeImpact*newIncrease);
+        //below code for patients who requirres hospitalization
+       var  severeCasesByRequestedTime=Math.floor(severeinfectionsByRequestedTime);
+       var  totalAvailableBedsforOccupacy=Math.floor(0.35*beds);
+       var  hospitalBedsByRequestedTime=Math.floor(totalAvailableBedsforOccupacy-severeCasesByRequestedTime);
+       var  casesForICUByRequestedTime=Math.floor(0.05*severeinfectionsByRequestedTime);
+       var casesForVentilatorsByRequestedTime=Math.floor(0.02*severeinfectionsByRequestedTime);
+       var dollarsInFlight=Math.floor(impactinfectionsByRequestedTime*0.65*income*days);
+       //inputs
+              input.innerHTML = "Your Entries/Inputs : " ;
+              reg.innerHTML = "Region: " + (region);
+               agy.innerHTML = "Average Age: " + (age);
+               incm.innerHTML = "Average Income of Population: " + (income);
+                ptype.innerHTML = "Period Type: " + (period);
+                elap.innerHTML = "Time to Elapse: " + (elapse);
+                  rcases.innerHTML = "Reported Cases: " + (reported);
+                tpop.innerHTML = "Total Population: " + (total_population);
+                tbeds.innerHTML = "Hospital Beds: " + (beds);
+              
+
+
+       //outputs for Impacts//
+          output.innerHTML = "The Estimates Result for Impacts Cases : " ;
+      infected.innerHTML = "The Estimation of currently  Infected is: " + (currentlyInfected);
+      severe.innerHTML = "The Estimation with Severe Impacts  is: " + (severeImpact);
+       estimate.innerHTML="The Estimation by your requested time is for Curretly infected is: " + (impactinfectionsByRequestedTime);
+       
+        estimateSevere.innerHTML="The Estimation by your requested time For Severe Cases is : " + (severeinfectionsByRequestedTime);
+         hospitalization.innerHTML = "The Estimation of Patients with Severe Case that requires hospitalization is: " + (severeCasesByRequestedTime);
+          kitanda.innerHTML = "The estimation of  the number of available Beds for Patients with Severe Case is : " + (hospitalBedsByRequestedTime);
+          dollars.innerHTML = "The estimation of how much money the economy is likely to lose in $ : " + (dollarsInFlight);
+         
+
+        svoutput.innerHTML = "The Estimates Results for Severe Cases : " ;
+
+
+
+} else if (document.getElementById('data-period-type').value == 'months') {
+  var  days=elapse*30;
+  var increase=Math.floor(days/3);
+       var newIncrease=Math.floor(2 ** increase);
+       var impactinfectionsByRequestedTime=Math.floor(currentlyInfected*newIncrease);
+        var severeinfectionsByRequestedTime=Math.floor(severeImpact*newIncrease);
+        //below code for patients who requirres hospitalization
+       var  severeCasesByRequestedTime=Math.floor(severeinfectionsByRequestedTime);
+       var  totalAvailableBedsforOccupacy=Math.floor(0.35*beds);
+       var  hospitalBedsByRequestedTime=Math.floor(totalAvailableBedsforOccupacy-severeCasesByRequestedTime);
+       var  casesForICUByRequestedTime=Math.floor(0.05*severeinfectionsByRequestedTime);
+       var casesForVentilatorsByRequestedTime=Math.floor(0.02*severeinfectionsByRequestedTime);
+       var dollarsInFlight=Math.floor(impactinfectionsByRequestedTime*0.65*income*days);       //inputs
+              input.innerHTML = "Your Entries/Inputs : " ;
+              reg.innerHTML = "Region: " + (region);
+               agy.innerHTML = "Average Age: " + (age);
+               incm.innerHTML = "Average Income of Population: " + (income);
+                ptype.innerHTML = "Period Type: " + (period);
+                elap.innerHTML = "Time to Elapse: " + (elapse);
+                  rcases.innerHTML = "Reported Cases: " + (reported);
+                tpop.innerHTML = "Total Population: " + (total_population);
+                tbeds.innerHTML = "Hospital Beds: " + (beds);
+              
+
+
+       //outputs for Impacts//
+          output.innerHTML = "The Estimates Result for Impacts Cases : " ;
+      infected.innerHTML = "The Estimation of currently  Infected is: " + (currentlyInfected);
+      severe.innerHTML = "The Estimation with Severe Impacts  is: " + (severeImpact);
+       estimate.innerHTML="The Estimation by your requested time is for Curretly infected is: " + (impactinfectionsByRequestedTime);
+       
+        estimateSevere.innerHTML="The Estimation by your requested time For Severe Cases is : " + (severeinfectionsByRequestedTime);
+         hospitalization.innerHTML = "The Estimation of Patients with Severe Case that requires hospitalization is: " + (severeCasesByRequestedTime);
+          kitanda.innerHTML = "The estimation of  the number of available Beds for Patients with Severe Case is : " + (hospitalBedsByRequestedTime);
+          dollars.innerHTML = "The estimation of how much money the economy is likely to lose in $ : " + (dollarsInFlight);
+         
+
+        svoutput.innerHTML = "The Estimates Results for Severe Cases : " ;
+
+
+ 
+} else {
+       
+       var  days=elapse;
+       var increase=Math.floor(days/3);
+       var newIncrease=Math.floor(2 ** increase);
+       var impactinfectionsByRequestedTime=Math.floor(currentlyInfected*newIncrease);
+        var severeinfectionsByRequestedTime=Math.floor(severeImpact*newIncrease);
+        //below code for patients who requirres hospitalization
+       var  severeCasesByRequestedTime=Math.floor(severeinfectionsByRequestedTime);
+       var  totalAvailableBedsforOccupacy=Math.floor(0.35*beds);
+       var  hospitalBedsByRequestedTime=Math.floor(totalAvailableBedsforOccupacy-severeCasesByRequestedTime);
+       var  casesForICUByRequestedTime=Math.floor(0.05*severeinfectionsByRequestedTime);
+       var casesForVentilatorsByRequestedTime=Math.floor(0.02*severeinfectionsByRequestedTime);
+       var dollarsInFlight=Math.floor(impactinfectionsByRequestedTime*0.65*income*days);
+       //inputs
+              input.innerHTML = "Your Entries/Inputs : " ;
+              reg.innerHTML = "Region: " + (region);
+               agy.innerHTML = "Average Age: " + (age);
+               incm.innerHTML = "Average Income of Population: " + (income);
+                ptype.innerHTML = "Period Type: " + (period);
+                elap.innerHTML = "Time to Elapse: " + (elapse);
+                  rcases.innerHTML = "Reported Cases: " + (reported);
+                tpop.innerHTML = "Total Population: " + (total_population);
+                tbeds.innerHTML = "Hospital Beds: " + (beds);
+              
+
+
+       //outputs for Impacts//
+          output.innerHTML = "The Estimates Result for Impacts Cases : " ;
+      infected.innerHTML = "The Estimation of currently  Infected is: " + (currentlyInfected);
+      severe.innerHTML = "The Estimation with Severe Impacts  is: " + (severeImpact);
+       estimate.innerHTML="The Estimation by your requested time is for Curretly infected is: " + (impactinfectionsByRequestedTime);
+       
+        estimateSevere.innerHTML="The Estimation by your requested time For Severe Cases is : " + (severeinfectionsByRequestedTime);
+         hospitalization.innerHTML = "The Estimation of Patients with Severe Case that requires hospitalization is: " + (severeCasesByRequestedTime);
+          kitanda.innerHTML = "The estimation of  the number of available Beds for Patients with Severe Case is : " + (hospitalBedsByRequestedTime);
+          dollars.innerHTML = "The estimation of how much money the economy is likely to lose in $ : " + (dollarsInFlight);
+         
+
+        svoutput.innerHTML = "The Estimates Results for Severe Cases : " ;
+
+
+
+       
+}
+                 
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+                
+                //currentlyInfected.innerHTML = "The Estimation of currently  Infected is: " + (reported*10);
+          
+                 
+
+
+
+
+              
+
+
+
+
+   }
+
+
+        </script>
+
+    
 
 
   </body>
 
 
+   
 
 
 
