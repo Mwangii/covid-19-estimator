@@ -5,23 +5,17 @@
 
 
 covid19ImpactEstimator();  
-  
 
 
 //function to perfom the estimations
 
 function covid19ImpactEstimator()
 {
-  $error_message = "";
-  $success_message = "";
+  $error_message = "";$success_message = "";
  $days= ""; $increase= "";  $newIncrease= "";  $truncated= "";
- $currentlyInfected= "";$severeImpact= "";$impactinfectionsByRequestedTime= "";
- $severeinfectionsByRequestedTime= "";  $hospitalBedsByRequestedTime= ""; 
+ $currentlyInfected= "";$severeImpact= "";$impactinfectionsByRequestedTime= "";$severeinfectionsByRequestedTime= "";
  $severeCasesByRequestedTime = "";$totalAvailableBedsforOccupacy = "";
- $casesForICUByRequestedTime= ""; $casesForVentilatorsByRequestedTime= ""; 
-  $dollarsInFlight= "";  $svimpact= "Severe Impact Estimation";$impact= " Impact Estimation";
-   $region= "";
-   $age= "age"; $period= ""; $income= ""; $population= ""; $elapse= "";$reported= "";$total_population= "";$hospital= "";
+ $casesForICUByRequestedTime= ""; $casesForVentilatorsByRequestedTime= "";  $dollarsInFlight= "";  $svimpact= "Severe Impact Estimation";$impact= " Impact Estimation";$input= " Inputs"; $hospitalBedsByRequestedTime= "";
 
 // Register  data
 if(isset($_POST['calculate'])){
@@ -45,15 +39,33 @@ if(isset($_POST['calculate'])){
      $isValid = false;
      $error_message = "Please fill all fields.";
    }
+   //convert months to days()
+   if($isValid && ($period== 'months') ){
+         $days = $elapse*30;
+       
+   
+   }
+  // convert weeks to days
+     if($isValid && ($period== 'weeks') ){
+         $days = $elapse*7;
+       
+   }
+   // convert weeks to days
+     if($isValid && ($period== 'days') ){
+         $days = $elapse;
+       
+   }
+
+
 
        
 
  if($isValid ){
-    
+
    $currentlyInfected=$reported*10; 
   $severeImpact=$reported*50;
          
-   $increase = floor($elapse/3);
+   $increase = floor($days/3);
    $newIncrease = floor(2 ** $increase);
 
 
@@ -68,8 +80,40 @@ if(isset($_POST['calculate'])){
     
    }
     
-   
+       echo "" . $input. "<br>"; 
       
+       echo "<table border=1 cellspacing=0 cellpading=0>
+<tr> <td><font color=blue>Region</td> <td>$region</font></td></tr> 
+<tr> <td><font color=blue>Average Age</td> <td>$age</font></td></tr>
+<tr> <td><font color=blue>Average Daily Income</td> <td>$income </font></td></tr>
+<tr> <td><font color=blue>Average Daily Income Per Population</td> <td>$population </font></td></tr>
+<tr> <td><font color=blue>Period Type</td> <td>$period </font></td></tr>
+<tr> <td><font color=blue>Time to Elapse</td> <td>$elapse </font></td></tr>
+<tr> <td><font color=blue> Total Reported Cases</td> <td>$reported </font></td></tr>
+
+<tr> <td><font color=blue>Total Population</td> <td>$total_population</font></td></tr>
+
+<tr> <td><font color=blue>Hospital Beds</td> <td>$hospital </font></td></tr>
+
+</table>";
+   
+      echo "" . $impact. "<br>"; 
+      
+       echo "<table border=1 cellspacing=0 cellpading=0>
+<tr> <td><font color=blue>Estimation of Currently Infected is</td> <td>$currentlyInfected</font></td></tr> 
+<tr> <td><font color=blue>Estimation  by requested time for currently infected</td> <td>$impactinfectionsByRequestedTime</font></td></tr>
+<tr> <td><font color=blue>Estimation of Monentary value likely to be lost in USD  is</td> <td>$hospital$ </font></td></tr>
+</table>";
+
+echo "" . $svimpact. "<br>"; 
+echo "<table border=1 cellspacing=0 cellpading=0>
+<tr> <td><font color=blue>The Estimation of Severe Impacts</td> <td>$severeImpact</font></td></tr> 
+<tr> <td><font color=blue>Estimation  by requested time for Severly infected</td> <td>$severeinfectionsByRequestedTime</font></td></tr>
+<tr> <td><font color=blue>Available beds for patients with Severe Cases</td> <td>$hospitalBedsByRequestedTime</font></td></tr>
+<tr> <td><font color=blue>Severe Cases that requires hospitalization</td> <td>$severeCasesByRequestedTime</font></td></tr>
+
+</table>";
+
 
 
 }
