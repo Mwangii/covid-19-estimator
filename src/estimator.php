@@ -91,6 +91,8 @@ function covid19ImpactEstimator()
  $severeCasesByRequestedTime = "";$totalAvailableBedsforOccupacy = "";
  $casesForICUByRequestedTime= ""; $casesForVentilatorsByRequestedTime= ""; 
   $dollarsInFlight= "";  $svimpact= "Severe Impact Estimation";$impact= " Impact Estimation";
+   $region= "";
+   $age= "age"; $period= ""; $income= ""; $population= ""; $elapse= "";$reported= "";$total_population= "";$hospital= "";
 
 // Register  data
 if(isset($_POST['calculate'])){
