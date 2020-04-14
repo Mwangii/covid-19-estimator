@@ -18,11 +18,11 @@
 </tr>    
 <tr>    
 <td>Region</td>    
-<td><input type="text"  value="<?php echo $_POST['region']; ?>" readonly="" /></td>  
+<td><input type="text"  value="<?php echo .$region. ?>" readonly="" /></td>  
 </tr>  
 <tr>    
 <td>Average Age</td>   
-<td><input type="number" value="<?php echo $_POST['age']; ?>" readonly="" /></td>  
+<td><input type="number" value="<?php echo .$age. ?>" readonly="" /></td>  
 </tr>  
 <tr>    
 <td>Average Daily Income in USD</td>    
